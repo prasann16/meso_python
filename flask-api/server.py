@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-import get_summary
+import model
 
 app = Flask(__name__)
 
@@ -7,9 +7,9 @@ app = Flask(__name__)
 def predict():
     data = request.get_json(force=True)
     text = data['text']
-    prediction = get_summary.get_summary(text)
+    prediction = model.get_summary(text)
     return jsonify({'result':prediction})
 
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000)
